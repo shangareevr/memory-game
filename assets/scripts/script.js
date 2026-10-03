@@ -5,14 +5,53 @@ window.addEventListener('DOMContentLoaded', e=> {
     const main = createElement('main', 'main');
     createGameBoard(main);
     header.after(main);
-
+    let firstIndex = null;
+    let secondIndex = null;
+    let firstCardIndex = null;
+    let secondCardIndex = null;
+    let isFirstClick = true;
+    console.log(gameImagesIndxForCard)
     const cards = document.querySelectorAll('.game__item');
     if (cards.length > 0) {
         cards.forEach((card, index)=> {
             card.addEventListener('click', e=> {
-                const image = card.querySelector('.game__image');
-                image.style.backgroundImage = `url(${images[gameImagesIndxForCard[index]]})`;
-                card.classList.add('active');
+                const activeCards = document.querySelectorAll('.game__item.active');
+                if (activeCards.length < 2) {
+                    const image = card.querySelector('.game__image');
+                    const imageIndex = gameImagesIndxForCard[index];
+                    image.style.backgroundImage = `url(${images[imageIndex]})`;
+                    card.classList.add('active');
+
+                    if (isFirstClick) {
+                        firstIndex = imageIndex;
+                        firstCardIndex = index;
+                    } else {                        
+                        secondIndex = imageIndex;
+                        secondCardIndex = index;
+                    }
+
+                    console.log(firstIndex, firstCardIndex, secondIndex, secondCardIndex)
+                    if (!isFirstClick) {
+                        if (firstIndex === secondIndex ) {
+                            firstIndex = null;
+                            secondIndex = null;
+                            cards[firstCardIndex].className = 'game__item fixed';
+                            cards[secondCardIndex].className = 'game__item fixed';
+                            firstCardIndex = null;
+                            secondCardIndex = null;
+                        } else {
+                            setTimeout(()=>{
+                                cards[firstCardIndex].classList.remove('active');
+                                cards[secondCardIndex].classList.remove('active');
+                                firstIndex = null;
+                                firstCardIndex = null;
+                                secondIndex = null;
+                                secondCardIndex = null;
+                            }, 1000)
+                        }
+                    }
+                    isFirstClick = !isFirstClick;
+                }
             })
         })
     }

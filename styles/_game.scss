@@ -38,7 +38,8 @@
             transition: all ease-in-out 0.3s;
         }
 
-        &.active {
+        &.active,
+        &.fixed {
             &::after {
                 transform: rotateY(180deg);
                 z-index: -1;

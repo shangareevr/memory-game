@@ -433,12 +433,12 @@ body {
   -webkit-transition: all ease-in-out 0.3s;
   transition: all ease-in-out 0.3s;
 }
-.game__item.active::after {
+.game__item.active::after, .game__item.fixed::after {
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   z-index: -1;
 }
-.game__item.active .game__image {
+.game__item.active .game__image, .game__item.fixed .game__image {
   -webkit-transform: rotate(0);
           transform: rotate(0);
 }
