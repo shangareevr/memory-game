@@ -408,6 +408,70 @@ body {
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
+.game__board.start .game__item:nth-child(1) {
+  -webkit-transform: translate(calc(150% + 30px), calc(150% + 40px));
+          transform: translate(calc(150% + 30px), calc(150% + 40px));
+}
+.game__board.start .game__item:nth-child(2) {
+  -webkit-transform: translate(calc(50% + 10px), calc(150% + 40px));
+          transform: translate(calc(50% + 10px), calc(150% + 40px));
+}
+.game__board.start .game__item:nth-child(3) {
+  -webkit-transform: translate(calc(-50% - 10px), calc(150% + 40px));
+          transform: translate(calc(-50% - 10px), calc(150% + 40px));
+}
+.game__board.start .game__item:nth-child(4) {
+  -webkit-transform: translate(calc(-150% - 30px), calc(150% + 40px));
+          transform: translate(calc(-150% - 30px), calc(150% + 40px));
+}
+.game__board.start .game__item:nth-child(5) {
+  -webkit-transform: translate(calc(150% + 30px), calc(50% + 20px));
+          transform: translate(calc(150% + 30px), calc(50% + 20px));
+}
+.game__board.start .game__item:nth-child(6) {
+  -webkit-transform: translate(calc(50% + 10px), calc(50% + 20px));
+          transform: translate(calc(50% + 10px), calc(50% + 20px));
+}
+.game__board.start .game__item:nth-child(7) {
+  -webkit-transform: translate(calc(-50% - 10px), calc(50% + 20px));
+          transform: translate(calc(-50% - 10px), calc(50% + 20px));
+}
+.game__board.start .game__item:nth-child(8) {
+  -webkit-transform: translate(calc(-150% - 30px), calc(50% + 20px));
+          transform: translate(calc(-150% - 30px), calc(50% + 20px));
+}
+.game__board.start .game__item:nth-child(9) {
+  -webkit-transform: translate(calc(150% + 30px), -50%);
+          transform: translate(calc(150% + 30px), -50%);
+}
+.game__board.start .game__item:nth-child(10) {
+  -webkit-transform: translate(calc(50% + 10px), -50%);
+          transform: translate(calc(50% + 10px), -50%);
+}
+.game__board.start .game__item:nth-child(11) {
+  -webkit-transform: translate(calc(-50% - 10px), -50%);
+          transform: translate(calc(-50% - 10px), -50%);
+}
+.game__board.start .game__item:nth-child(12) {
+  -webkit-transform: translate(calc(-150% - 30px), -50%);
+          transform: translate(calc(-150% - 30px), -50%);
+}
+.game__board.start .game__item:nth-child(13) {
+  -webkit-transform: translate(calc(150% + 30px), calc(-150% - 20px));
+          transform: translate(calc(150% + 30px), calc(-150% - 20px));
+}
+.game__board.start .game__item:nth-child(14) {
+  -webkit-transform: translate(calc(50% + 10px), calc(-150% - 20px));
+          transform: translate(calc(50% + 10px), calc(-150% - 20px));
+}
+.game__board.start .game__item:nth-child(15) {
+  -webkit-transform: translate(calc(-50% - 10px), calc(-150% - 20px));
+          transform: translate(calc(-50% - 10px), calc(-150% - 20px));
+}
+.game__board.start .game__item:nth-child(16) {
+  -webkit-transform: translate(calc(-150% - 30px), calc(-150% - 20px));
+          transform: translate(calc(-150% - 30px), calc(-150% - 20px));
+}
 .game__item {
   width: 100%;
   height: auto;

@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', e=> {
         cards.forEach((card, index)=> {
             card.addEventListener('click', e=> {
                 const activeCards = document.querySelectorAll('.game__item.active');
-                if (activeCards.length < 2) {
+                if (activeCards.length < 2 && !document.querySelector('.game__board.start')) {
                     const image = card.querySelector('.game__image');
                     const imageIndex = gameImagesIndxForCard[index];
                     image.style.backgroundImage = `url(${images[imageIndex]})`;
@@ -55,6 +55,20 @@ window.addEventListener('DOMContentLoaded', e=> {
             })
         })
     }
+
+    const newGameBtn = document.querySelector('.header__new-game');
+    if (newGameBtn) {
+        newGameBtn.addEventListener('click', e=> {
+            newGame();
+        })
+    }
+
+    setTimeout(()=> {
+        const board = document.querySelector('.game__board.start');
+        if (board) {
+            board.classList.remove('start');
+        }
+    }, 1000)
 });
 
 function createHeader() {
@@ -82,7 +96,7 @@ function createGameBoard(parentElement) {
     gameValueWrap.append(gameValue);
     gameValueWrap.append(' из 8');
     game.append(gameCounterWrap, gameValueWrap);
-    const gameBoard = createElement('div', 'game__board');
+    const gameBoard = createElement('div', 'game__board start');
     for(let i = 0; i < images.length * 2; i++) {
         const gameItem = createElement('div', 'game__item');
         const gameImage = createElement('div', 'game__image');
@@ -122,10 +136,45 @@ function createRandomArray(min, max, repetitions = 1) {
     return array;
 }
 
-const gameImagesIndxForCard = createRandomArray(0, images.length - 1, 2);
+let gameImagesIndxForCard = createRandomArray(0, images.length - 1, 2);
 
 function updateElementValue(element) {
     const currentElement = document.querySelector(element);
     const currentValue = +currentElement.innerText;
     currentElement.innerText = currentValue + 1;
+}
+
+function newGame () {
+    gameImagesIndxForCard = createRandomArray(0, images.length - 1, 2);
+    firstIndex = null;
+    secondIndex = null;
+    firstCardIndex = null;
+    secondCardIndex = null;
+    isFirstClick = true;
+    const cards = document.querySelectorAll('.game__item');
+    if (cards.length > 0) {
+        cards.forEach(card=> {
+            card.className = 'game__item';
+        })
+    }
+
+    const counter = document.querySelector('.game__counter');
+
+    if (counter) {
+        counter.innerText = 0;
+    }
+
+    const value = document.querySelector('.game__value');
+    if (value) {
+        value.innerText = 0;
+    }
+
+    const board = document.querySelector('.game__board');
+    board.classList.add('start');
+    setTimeout(()=> {
+        const board = document.querySelector('.game__board.start');
+        if (board) {
+            board.classList.remove('start');
+        }
+    }, 1000)
 }
