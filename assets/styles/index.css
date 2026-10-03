@@ -458,7 +458,7 @@ body {
   background-color: white;
 }
 @media (hover: hover) {
-  .game__item:hover {
+  .game__item:not(.active, .fixed):hover {
     -webkit-transform: scale(1.05);
             transform: scale(1.05);
   }

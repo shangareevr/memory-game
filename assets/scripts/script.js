@@ -10,7 +10,6 @@ window.addEventListener('DOMContentLoaded', e=> {
     let firstCardIndex = null;
     let secondCardIndex = null;
     let isFirstClick = true;
-    console.log(gameImagesIndxForCard)
     const cards = document.querySelectorAll('.game__item');
     if (cards.length > 0) {
         cards.forEach((card, index)=> {
@@ -28,9 +27,9 @@ window.addEventListener('DOMContentLoaded', e=> {
                     } else {                        
                         secondIndex = imageIndex;
                         secondCardIndex = index;
+                        updateElementValue('.game__counter');
                     }
 
-                    console.log(firstIndex, firstCardIndex, secondIndex, secondCardIndex)
                     if (!isFirstClick) {
                         if (firstIndex === secondIndex ) {
                             firstIndex = null;
@@ -39,6 +38,7 @@ window.addEventListener('DOMContentLoaded', e=> {
                             cards[secondCardIndex].className = 'game__item fixed';
                             firstCardIndex = null;
                             secondCardIndex = null;
+                            updateElementValue('.game__value');
                         } else {
                             setTimeout(()=>{
                                 cards[firstCardIndex].classList.remove('active');
@@ -123,3 +123,9 @@ function createRandomArray(min, max, repetitions = 1) {
 }
 
 const gameImagesIndxForCard = createRandomArray(0, images.length - 1, 2);
+
+function updateElementValue(element) {
+    const currentElement = document.querySelector(element);
+    const currentValue = +currentElement.innerText;
+    currentElement.innerText = currentValue + 1;
+}
