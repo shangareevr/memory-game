@@ -1,17 +1,18 @@
 window.addEventListener('DOMContentLoaded', e=> {
     const body = document.body;
-    createHeader(body);
+    const header = createHeader();
+    body.prepend(header);
     const main = createElement('main', 'main');
     createGameBoard(main);
-    body.append(main)
+    header.after(main);
 });
 
-function createHeader(parentElement) {
+function createHeader() {
     const header = createElement('header', 'header');
     const newGameBtn = createElement('button', 'header__new-game header__btn', 'Новая игра');
     const resultsBtn = createElement('button', 'header__results header__btn', 'Таблица лидеров');
     header.append(newGameBtn, resultsBtn);
-    parentElement.append(header);
+    return header;
 }
 
 function createElement(tagName, className, text = '' ) {
