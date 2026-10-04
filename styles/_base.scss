@@ -35,4 +35,8 @@ body {
 body {
     background: #E1D4C9;
     color: #403F3D;
+
+    &:has(.modal.active) {
+      overflow: hidden;
+    }
 }
