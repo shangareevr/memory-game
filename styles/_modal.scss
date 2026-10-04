@@ -66,6 +66,13 @@
         height: 40px;
         border-radius: 10px;
         margin-top: 20px;
+        cursor: pointer;
+
+        @media (hover: hover) {
+            &:hover {
+                background: rgba(white, 0.4);
+            }
+        }
     }
 
     &__table {
@@ -73,5 +80,15 @@
         grid-template-columns: repeat(3, 1fr);
         margin-top: 20px;
         gap: 5px;
+
+        &:empty {
+            margin-top: 0;
+        }
+    }
+
+    &:has(.modal__table:not(:empty)) {
+        .modal__new-game {
+            display: none;
+        }
     }
 }

@@ -611,10 +611,22 @@ body:has(.modal.active) {
   height: 40px;
   border-radius: 10px;
   margin-top: 20px;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .modal__btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
 }
 .modal__table {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin-top: 20px;
   gap: 5px;
+}
+.modal__table:empty {
+  margin-top: 0;
+}
+.modal:has(.modal__table:not(:empty)) .modal__new-game {
+  display: none;
 }/*# sourceMappingURL=index.css.map */

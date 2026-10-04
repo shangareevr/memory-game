@@ -271,14 +271,6 @@ function openModal(title, text, showTable = false) {
                     modalTable.append(indexEl, counterEl, resultDate);
                 })
         }
-
-        if (showTable) {
-            const newGameBtn = document.querySelector('.modal__new-game');
-
-            if (newGameBtn) {
-                newGameBtn.style.display = 'none';
-            }
-        }
     }
 }
 
