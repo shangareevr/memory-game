@@ -589,6 +589,9 @@ body:has(.modal.active) {
   margin-top: 20px;
   font-size: 1.5rem;
 }
+.modal__text:empty {
+  display: none;
+}
 .modal__btns {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -596,9 +599,22 @@ body:has(.modal.active) {
   gap: 20px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .modal__btn {
   width: calc(50% - 10px);
   height: 40px;
   border-radius: 10px;
+  margin-top: 20px;
+}
+.modal__table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 20px;
+  gap: 5px;
 }/*# sourceMappingURL=index.css.map */

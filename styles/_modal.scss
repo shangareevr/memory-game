@@ -47,17 +47,31 @@
     &__text {
         margin-top: 20px;
         font-size: 1.5rem;
+
+        &:empty {
+            display: none;
+        }
     }
 
     &__btns {
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
     }
 
     &__btn {
         width: calc(50% - 10px);
         height: 40px;
         border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    &__table {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 20px;
+        gap: 5px;
     }
 }

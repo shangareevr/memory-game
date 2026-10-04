@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', e=> {
     let total = 0;
     let totalClick = 0;
     let results = JSON.parse(localStorage.getItem('rshRes') ?? '[]');
-    console.log(gameImagesIndxForCard)
+
     const cards = document.querySelectorAll('.game__item');
     if (cards.length > 0) {
         cards.forEach((card, index)=> {
@@ -48,10 +48,11 @@ window.addEventListener('DOMContentLoaded', e=> {
                             updateElementValue('.game__value');
                             total++;
                             if (total == images.length) {
-                                openModal('Поздравляю вы выиграли', `Количество ходов:  ${totalClick}`);
+                                openModal('Поздравляю вы выиграли', `Количество ходов:  ${totalClick}`, false);
                                 total = 0;
                                 results.push([totalClick, Date.now()]);
                                 sortAndSaveResult(results);
+                                totalClick = 0;
                             }
                         } else {
                             setTimeout(()=>{
@@ -106,6 +107,13 @@ window.addEventListener('DOMContentLoaded', e=> {
             modalClose();
         }
     });
+
+    const showTableBtn = document.querySelector('.header__results');
+    if (showTableBtn) {
+        showTableBtn.addEventListener('click', e=> {
+            openModal('Результаты последних 10 игр', '', true)
+        })
+    }
 });
 
 function createHeader() {
@@ -225,20 +233,17 @@ function creatModal() {
     const modalTitle = createElement('div', 'modal__title');
     const modalContent = createElement('div', 'modal__text');
     const modalTable = createElement('div', 'modal__table');
-    const tablePosition = createElement('div', 'modal__position', 'место');
-    const tableCount = createElement('div', 'modal__count', 'Количество ходов');
-    const tableDate = createElement('div','modal__date', 'Дата игры');
+
     const modalBtns = createElement('div', 'modal__btns');
     const modalClose = createElement('button', 'modal__btn modal__close', 'Закрыть');
     const modalNewGame = createElement('button', 'modal__btn modal__new-game btn-new-game', 'Новая игра');
     modalBtns.append(modalClose, modalNewGame);
-    modalTable.append(tablePosition, tableCount, tableDate);
     modalWrap.append(modalTitle, modalContent, modalTable, modalBtns);
     modal.append(overlay, modalWrap);
     return modal;
 }
 
-function openModal(title, text) {
+function openModal(title, text, showTable = false) {
     const modal = document.querySelector('.modal');
     if (modal) {
         modal.classList.add('active');
@@ -246,6 +251,34 @@ function openModal(title, text) {
         modalTitle.innerText = title;
         const modalText = document.querySelector('.modal__text');
         modalText.innerText = text;
+        let results = JSON.parse(localStorage.getItem('rshRes') ?? '[]');
+
+        if (showTable && results.length == 0) {
+            modalText.innerText = 'К сожалению таблица пуста'
+        }
+        const modalTable = document.querySelector('.modal__table');
+        modalTable.innerText = '';
+
+        if (showTable && modalTable && results.length > 0) {
+            const tablePosition = createElement('div', 'modal__position', 'место');
+            const tableCount = createElement('div', 'modal__count', 'Количество ходов');
+            const tableDate = createElement('div','modal__date', 'Дата игры');
+            modalTable.append(tablePosition, tableCount, tableDate);
+                results.forEach((result, index)=> {
+                    const indexEl = createElement('div', 'modal__position', `${index + 1}`);
+                    const counterEl = createElement('div', 'modal__count', result[0]);
+                    const resultDate = createElement('div', 'modal__date', formatDate(result[1]));
+                    modalTable.append(indexEl, counterEl, resultDate);
+                })
+        }
+
+        if (showTable) {
+            const newGameBtn = document.querySelector('.modal__new-game');
+
+            if (newGameBtn) {
+                newGameBtn.style.display = 'none';
+            }
+        }
     }
 }
 
@@ -263,7 +296,16 @@ function sortAndSaveResult(arr) {
         }
         return a[1] - b[1];
     });
-
+    arr.splice(10);
     localStorage.setItem('rshRes', JSON.stringify(arr));
     return arr;
+}
+
+function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+
+    return `${day}.${month}.${year}`;
 }
