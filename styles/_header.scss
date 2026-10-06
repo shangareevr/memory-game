@@ -1,0 +1,28 @@
+.header {
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    &__btn {
+        color: white;
+        background: #665F55;
+        padding: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.2s ease-in-out;
+    }
+
+    @media (hover:hover) {
+        &__btn {
+            &:hover {
+                background: rgba(#665F55, 0.5);
+            }
+        }
+    }
+}
